@@ -1,0 +1,2 @@
+# PyGObject (GTK4 + libadwaita) ставится из apt, а не из pip — см. README.md
+yt-dlp>=2024.8.6
