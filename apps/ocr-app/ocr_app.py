@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Картинки в текст: локальное распознавание (Tesseract), русский + английский.
+"""Re Scan: локальное распознавание (Tesseract), русский + английский.
 
 Что умеет:
 - перетащить картинки мышкой в окно
@@ -98,7 +98,7 @@ def btn(label, cb, primary=False):
 
 class App(Gtk.Window):
     def __init__(self):
-        super().__init__(title="Картинки в текст")
+        super().__init__(title="Re Scan")
         self.set_default_size(1000, 640)
         self.set_icon_name("ocr-app")
         self.busy = False

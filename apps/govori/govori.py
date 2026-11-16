@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Нажми и говори: зажал клавишу, сказал, отпустил, и текст вставился туда, где курсор.
+"""Re Voice: зажал клавишу, сказал, отпустил, и текст вставился туда, где курсор.
 Всё работает локально (Whisper), интернет нужен только чтобы один раз скачать модель.
 Только для X11.
 
@@ -144,7 +144,7 @@ def desktop_text(background):
     text = (
         "[Desktop Entry]\n"
         "Type=Application\n"
-        "Name=Нажми и говори\n"
+        "Name=Re Voice\n"
         "Comment=Диктовка голосом: зажал клавишу, сказал, текст вставился\n"
         f"Exec={exec_line}\n"
         f"Path={os.path.dirname(SCRIPT)}\n"
@@ -295,7 +295,7 @@ class SettingsWindow(QWidget):
         super().__init__()
         self.app = app
         self.setObjectName("settings")
-        self.setWindowTitle("Нажми и говори: настройки")
+        self.setWindowTitle("Re Voice: настройки")
         self.setStyleSheet(STYLE)
         self.setMinimumWidth(560)
         cfg = app.cfg
@@ -304,7 +304,7 @@ class SettingsWindow(QWidget):
         root.setContentsMargins(28, 24, 28, 24)
         root.setSpacing(16)
 
-        title = QLabel("Нажми и говори")
+        title = QLabel("Re Voice")
         title.setObjectName("title")
         root.addWidget(title)
 
@@ -462,7 +462,7 @@ class App:
 
         # --- трей ---
         self.tray = QSystemTrayIcon(dot_icon("#8b8fa3"))
-        self.tray.setToolTip("Нажми и говори: загружаю модель…")
+        self.tray.setToolTip("Re Voice: загружаю модель…")
         menu = QMenu()
         self.status_action = menu.addAction("Загружаю модель…")
         self.status_action.setEnabled(False)
@@ -552,7 +552,7 @@ class App:
     def on_model_loaded(self):
         self.model_ready = True
         self.tray.setIcon(dot_icon("#3ecf8e"))
-        self.tray.setToolTip("Нажми и говори: готово")
+        self.tray.setToolTip("Re Voice: готово")
         self.status_action.setText("Готово. Держи клавишу и говори")
         self.flash("Готово, можно диктовать", "#3ecf8e", 2000)
 

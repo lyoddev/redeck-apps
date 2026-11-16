@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Напоминалка: размяться, выпить воды, дать глазам отдохнуть.
+"""Re Mind: размяться, выпить воды, дать глазам отдохнуть.
 Живёт в трее. Когда пора, в правом нижнем углу всплывает окошко.
 Сделана в том же духе, что и «Нажми и говори» (PySide6, X11).
 
@@ -139,7 +139,7 @@ def desktop_text(background):
     text = (
         "[Desktop Entry]\n"
         "Type=Application\n"
-        "Name=Напоминалка\n"
+        "Name=Re Mind\n"
         "Comment=Размяться, выпить воды, дать глазам отдохнуть\n"
         f"Exec={exec_line}\n"
         f"Path={os.path.dirname(SCRIPT)}\n"
@@ -411,7 +411,7 @@ class Panel(QWidget):
         self.rows, self.pause_btn = {}, None
         self.setObjectName("win")
         self.setAttribute(Qt.WA_StyledBackground, True)
-        self.setWindowTitle("Напоминалка")
+        self.setWindowTitle("Re Mind")
         self.setFixedWidth(470)
         self.root = QVBoxLayout(self)
         self.root.setContentsMargins(28, 24, 28, 26)
@@ -420,7 +420,7 @@ class Panel(QWidget):
     def rebuild(self):
         clear_layout(self.root)
         self.rows = {}
-        title = QLabel("Напоминалка")
+        title = QLabel("Re Mind")
         title.setObjectName("title")
         info = QLabel("Работает в фоне. Когда придёт время, в правом нижнем углу "
                       "всплывёт окошко. Здесь видно, сколько осталось до каждого "
@@ -475,7 +475,7 @@ class Settings(QWidget):
         self.setObjectName("win")
         self.setAttribute(Qt.WA_StyledBackground, True)
         self.setAttribute(Qt.WA_DeleteOnClose, True)
-        self.setWindowTitle("Напоминалка: настройки")
+        self.setWindowTitle("Re Mind: настройки")
         self.setMinimumWidth(760)
         cfg = app.cfg
 
@@ -610,7 +610,7 @@ class App:
 
         # --- трей ---
         self.tray = QSystemTrayIcon(tray_icon())
-        self.tray.setToolTip("Напоминалка")
+        self.tray.setToolTip("Re Mind")
         menu = QMenu()
         self.status_action = menu.addAction("…")
         self.status_action.setEnabled(False)
@@ -735,7 +735,7 @@ class App:
         if dot != self.tray_state:
             self.tray_state = dot
             self.tray.setIcon(tray_icon(dot))
-        self.tray.setToolTip("Напоминалка: " + status)
+        self.tray.setToolTip("Re Mind: " + status)
 
 
 def main():

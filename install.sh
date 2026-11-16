@@ -15,6 +15,7 @@ usage() {
   echo "  ./install.sh список         показать доступные программы"
   echo "  ./install.sh ID             установить программу"
   echo "  ./install.sh удалить ID     удалить программу"
+  echo "  ./install.sh ярлык ID       обновить только ярлык и название в меню"
 }
 
 list_apps() {
@@ -34,6 +35,50 @@ remove_app() {
   fi
   rm -rf "$ROOT/$id" "$BIN/$id" "$DESK/$dname.desktop" "$DESK/redeck-$id.desktop" "$ICONS/$dname.svg"
   echo "Удалено: $id"
+}
+
+write_shortcut() {
+  local id="$1"
+  local dname="${DESKTOP_ID:-$id}"
+  local icon_name="${ICON:-applications-other}"
+  if [ -n "${ICON_FILE:-}" ] && [ -f "$HERE/apps/$id/$ICON_FILE" ]; then
+    mkdir -p "$ICONS"
+    cp "$HERE/apps/$id/$ICON_FILE" "$ICONS/$dname.svg"
+    icon_name="$dname"
+  fi
+
+  rm -f "$DESK/redeck-$id.desktop"
+  cat > "$DESK/$dname.desktop" <<EOF
+[Desktop Entry]
+Type=Application
+Name=$NAME
+Comment=${COMMENT:-}
+Exec=$BIN/$id
+Icon=$icon_name
+Terminal=false
+Categories=${CATEGORY:-Utility;}
+${WMCLASS:+StartupWMClass=$WMCLASS}
+EOF
+  gtk-update-icon-cache -f -t "$HOME/.local/share/icons/hicolor" 2>/dev/null || true
+  update-desktop-database "$DESK" 2>/dev/null || true
+}
+
+relink_app() {
+  local id="$1"
+  local conf="$HERE/apps/$id/app.conf"
+  if [ ! -f "$conf" ]; then
+    echo "Нет такой программы: $id"
+    list_apps
+    exit 1
+  fi
+  # shellcheck disable=SC1090
+  source "$conf"
+  if [ ! -d "$ROOT/$id" ]; then
+    echo "Программа $id не установлена. Сначала: bash install.sh $id"
+    exit 1
+  fi
+  write_shortcut "$id"
+  echo "Ярлык обновлён: $NAME"
 }
 
 install_app() {
@@ -113,28 +158,7 @@ EOF
   fi
   chmod +x "$BIN/$id"
 
-  local dname="${DESKTOP_ID:-$id}"
-  local icon_name="${ICON:-applications-other}"
-  if [ -n "${ICON_FILE:-}" ] && [ -f "$HERE/apps/$id/$ICON_FILE" ]; then
-    mkdir -p "$ICONS"
-    cp "$HERE/apps/$id/$ICON_FILE" "$ICONS/$dname.svg"
-    icon_name="$dname"
-  fi
-
-  rm -f "$DESK/redeck-$id.desktop"
-  cat > "$DESK/$dname.desktop" <<EOF
-[Desktop Entry]
-Type=Application
-Name=$NAME
-Comment=${COMMENT:-}
-Exec=$BIN/$id
-Icon=$icon_name
-Terminal=false
-Categories=${CATEGORY:-Utility;}
-${WMCLASS:+StartupWMClass=$WMCLASS}
-EOF
-  gtk-update-icon-cache -f -t "$HOME/.local/share/icons/hicolor" 2>/dev/null || true
-  update-desktop-database "$DESK" 2>/dev/null || true
+  write_shortcut "$id"
 
   echo
   echo "Готово: $NAME"
@@ -149,5 +173,6 @@ case "${1:-}" in
   ""|-h|--help) usage; echo; list_apps ;;
   список|list)  list_apps ;;
   удалить|remove) remove_app "${2:?Укажи ID программы}" ;;
+  ярлык|relink) relink_app "${2:?Укажи ID программы}" ;;
   *) install_app "$1" ;;
 esac

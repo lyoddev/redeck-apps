@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Сжиматель видео: перетащил файлы, выбрал качество, нажал кнопку. Всё делает ffmpeg."""
+"""Re Shrink: перетащил файлы, выбрал качество, нажал кнопку. Всё делает ffmpeg."""
 
 import os
 import shutil
@@ -91,7 +91,7 @@ def install_launcher():
     write_if_changed(LAUNCHER_PATH, (
         "[Desktop Entry]\n"
         "Type=Application\n"
-        "Name=Сжиматель видео\n"
+        "Name=Re Shrink\n"
         "Comment=Сжать видео через ffmpeg\n"
         f'Exec="{sys.executable}" "{SCRIPT}"\n'
         f"Path={os.path.dirname(SCRIPT)}\n"
@@ -222,7 +222,7 @@ class Main(QWidget):
     def __init__(self):
         super().__init__()
         self.setObjectName("root")
-        self.setWindowTitle("Сжиматель видео")
+        self.setWindowTitle("Re Shrink")
         self.resize(760, 780)
         self.out_dir = None  # None = рядом с оригиналом
         self.proc = None
@@ -234,7 +234,7 @@ class Main(QWidget):
         root.setContentsMargins(28, 24, 28, 24)
         root.setSpacing(14)
 
-        title = QLabel("Сжиматель видео")
+        title = QLabel("Re Shrink")
         title.setObjectName("title")
         sub = QLabel("Кинул файлы, выбрал качество, нажал «Сжать». Оригиналы не трогаются.")
         sub.setObjectName("subtitle")
@@ -468,7 +468,7 @@ class Main(QWidget):
         self.preset.setEnabled(True)
         self.codec.setEnabled(True)
         if not self.cancelled and shutil.which("notify-send"):
-            subprocess.Popen(["notify-send", "Сжиматель видео", "Всё готово"])
+            subprocess.Popen(["notify-send", "Re Shrink", "Всё готово"])
 
     def closeEvent(self, e):
         if self.proc:

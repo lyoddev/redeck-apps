@@ -278,7 +278,7 @@ class QueueRow(Gtk.ListBoxRow):
 
 class MainWindow(Adw.ApplicationWindow):
     def __init__(self, app: Adw.Application, settings) -> None:
-        super().__init__(application=app, title='MediaVault', default_width=760, default_height=900)
+        super().__init__(application=app, title='Re Saver', default_width=760, default_height=900)
         load_css()
         self.settings = settings
         self._token = 0              # номер запроса: устаревшие ответы игнорируем
@@ -306,7 +306,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.toasts.set_child(root)
 
         header = Adw.HeaderBar()
-        header.set_title_widget(Adw.WindowTitle(title='MediaVault', subtitle=''))
+        header.set_title_widget(Adw.WindowTitle(title='Re Saver', subtitle=''))
         prefs_btn = Gtk.Button.new_from_icon_name('preferences-system-symbolic')
         prefs_btn.set_tooltip_text('Настройки')
         prefs_btn.connect('clicked', self._on_open_prefs)

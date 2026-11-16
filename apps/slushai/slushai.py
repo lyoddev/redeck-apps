@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Слушай и переводи.
+"""Re Scribe.
 
 Кинул аудио или видео, получил текст (Whisper), при желании перевёл его (Argos Translate).
 Языки: русский, English, Deutsch. Всё работает на твоём компьютере.
@@ -109,7 +109,7 @@ def desktop_text():
     return (
         "[Desktop Entry]\n"
         "Type=Application\n"
-        "Name=Слушай и переводи\n"
+        "Name=Re Scribe\n"
         "Comment=Расшифровка аудио в текст и перевод\n"
         f'Exec="{sys.executable}" "{SCRIPT}"\n'
         f"Path={os.path.dirname(SCRIPT)}\n"
@@ -484,7 +484,7 @@ class Main(QWidget):
         save_config(self.cfg)
 
         self.setObjectName("main")
-        self.setWindowTitle("Слушай и переводи")
+        self.setWindowTitle("Re Scribe")
         self.setWindowIcon(QIcon(str(ICON_PATH)))
         self.setAcceptDrops(True)
         self.setMinimumSize(960, 600)
@@ -495,7 +495,7 @@ class Main(QWidget):
         root.setContentsMargins(24, 18, 24, 14)
         root.setSpacing(12)
 
-        title = QLabel("Слушай и переводи")
+        title = QLabel("Re Scribe")
         title.setObjectName("title")
         sub = QLabel("Расшифровка аудио в текст и перевод. Всё работает на твоём компьютере.")
         sub.setObjectName("muted")
@@ -1049,7 +1049,7 @@ class Main(QWidget):
             self.finish("Готово")
             self.refresh_view()
             if not self.isActiveWindow() and shutil.which("notify-send"):
-                subprocess.Popen(["notify-send", "Слушай и переводи", "Расшифровка готова"])
+                subprocess.Popen(["notify-send", "Re Scribe", "Расшифровка готова"])
 
     def finish(self, text):
         self.running = False

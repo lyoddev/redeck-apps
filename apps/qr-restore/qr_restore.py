@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-QR Восстановитель — достаёт содержимое из битых, мутных, мелких, перекошенных
+Re QR — достаёт содержимое из битых, мутных, мелких, перекошенных
 QR-кодов и рисует из него новый, чистый QR.
 
 Всё работает локально, без интернета.
@@ -475,7 +475,7 @@ class ImageBox(QLabel):
 class Main(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("QR Восстановитель")
+        self.setWindowTitle("Re QR")
         self.resize(1000, 640)
         self.setStyleSheet(STYLE)
         self.setAcceptDrops(True)
@@ -489,7 +489,7 @@ class Main(QWidget):
         root.setContentsMargins(18, 16, 18, 16)
         root.setSpacing(12)
 
-        t = QLabel("QR Восстановитель")
+        t = QLabel("Re QR")
         t.setObjectName("title")
         h = QLabel("Кинь картинку в окно, вставь через Ctrl+V или выбери файл. "
                    "Программа вытащит содержимое и нарисует чистый код.")
