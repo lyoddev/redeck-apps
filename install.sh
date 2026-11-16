@@ -33,7 +33,7 @@ remove_app() {
   if [ -f "$conf" ]; then
     dname="$( source "$conf"; echo "${DESKTOP_ID:-$id}" )"
   fi
-  rm -rf "$ROOT/$id" "$BIN/$id" "$DESK/$dname.desktop" "$DESK/redeck-$id.desktop" "$ICONS/$dname.svg"
+  rm -rf "$ROOT/$id" "$BIN/$id" "$DESK/$dname.desktop" "$DESK/redeck-$id.desktop" "$ICONS/$dname.svg" "$HOME/.config/autostart/$dname.desktop"
   echo "Удалено: $id"
 }
 
@@ -59,6 +59,18 @@ Terminal=false
 Categories=${CATEGORY:-Utility;}
 ${WMCLASS:+StartupWMClass=$WMCLASS}
 EOF
+  if [ "${AUTOSTART:-0}" = "1" ]; then
+    mkdir -p "$HOME/.config/autostart"
+    cat > "$HOME/.config/autostart/$dname.desktop" <<EOF
+[Desktop Entry]
+Type=Application
+Name=$NAME
+Exec=$BIN/$id --background
+Icon=$icon_name
+Terminal=false
+X-GNOME-Autostart-enabled=true
+EOF
+  fi
   gtk-update-icon-cache -f -t "$HOME/.local/share/icons/hicolor" 2>/dev/null || true
   update-desktop-database "$DESK" 2>/dev/null || true
 }

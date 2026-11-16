@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" width="150" height="150" xmlns:c2pa="http://c2pa.org/manifest">
+<rect width="150" height="150" rx="34" fill="#22C55E"/>
+<g fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="40" y="40" width="70" height="80" rx="12"/>
+<path d="M56 70 H94"/>
+<path d="M56 84 H94"/>
+<path d="M56 98 H78"/>
+</g>
+<rect x="56" y="30" width="38" height="20" rx="8" fill="#FFFFFF" stroke="#22C55E" stroke-width="6"/>
+</svg>
