@@ -19,7 +19,7 @@
 ## Установка
 
 ```bash
-git clone https://github.com/lyoddev/redeck-apps.git
+git clone https://github.com/ИМЯ_НА_GITHUB/redeck-apps.git
 cd redeck-apps
 bash install.sh список          # что есть
 bash install.sh szhimatel       # поставить одну программу
